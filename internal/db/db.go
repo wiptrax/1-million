@@ -20,6 +20,7 @@ func openDB() (*pgxpool.Pool, error) {
 		return nil, err
 	}
 	config.MaxConns = 50 // adjust based on your CPU & DB capacity
+	config.MinIdleConns = 25
 	conn, err := pgxpool.NewWithConfig(context.Background(), config)
 
 	if err != nil {
