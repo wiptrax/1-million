@@ -13,7 +13,15 @@ var counts int64
 
 func openDB() (*pgxpool.Pool, error) {
 	ctx := context.Background()
-	conn, err := pgxpool.New(ctx, "postgresql://postgres:password@localhost:5432/lowserver?sslmode=disable")
+	dbURL := "postgresql://postgres:password@localhost:5432/lowserver?sslmode=disable"
+
+	config, err := pgxpool.ParseConfig(dbURL)
+	if err != nil {
+		return nil, err
+	}
+	config.MaxConns = 50 // adjust based on your CPU & DB capacity
+	conn, err := pgxpool.NewWithConfig(context.Background(), config)
+
 	if err != nil {
 		return nil, err
 	}

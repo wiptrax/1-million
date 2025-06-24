@@ -4,6 +4,7 @@ import { check } from 'k6';
 export let options = {
   vus: 100,         // number of virtual users
   iterations: 1000000, // total number of POST requests
+  teardownTimeout: '3m',  // Increase teardown timeout to 2 minutes
 };
 
 export default function () {
@@ -20,3 +21,12 @@ export default function () {
   });
 }
 
+// teardown is called once after all iterations are done
+export function teardown() {
+  let res = http.get('http://localhost:8080/shutdown', {
+    timeout: '3m', 
+  }); 
+  check(res, {
+    'shutdown status is 200': (r) => r.status === 200,
+  });
+}
