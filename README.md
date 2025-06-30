@@ -10,6 +10,20 @@ This project provides a Golang server designed to benchmark and test database pe
 -   **Metrics**: Tracks insertion performance.
 -   **Parallelism**: Supports concurrent inserts for improved throughput.
 
+## System Specs
+- 6 core
+- 12 threads
+- 2.5 Ghz
+- 16 GB Ram
+
+## Results 
+##### Basic server  - 6 mins 41 secs
+![basic-server](https://github.com/wiptrax/1-million/blob/main/result/basic-server.png)
+##### Gorutine server  - 2 mins 24 secs
+![goroutine-server](https://github.com/wiptrax/1-million/blob/main/result/goroutine-server.png)
+##### Worker-Pool server  - 22 secs
+![worker-pool-server](https://github.com/wiptrax/1-million/blob/main/result/worker-pool%26batch.png)
+
 ## Prerequisites
 
 -   Go 1.16+
